@@ -19,7 +19,7 @@ get:
       required: true
       schema:
         type: string
-    - name: with_email
+    - name: with_email_super
       in: query
       description: Filter users without email
       schema:
