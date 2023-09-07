@@ -1,0 +1,61 @@
+openapi: 3.0.0
+info:
+  title: test
+  description: some
+  version: "1"
+
+paths:
+  /path:
+    get: 
+      responses: 
+        default: 
+          description: yes
+      requestBody: 
+        content: 
+          item:
+            schema:
+              $ref: "#/components/schemas/Foo"
+        
+
+components:
+  schemas:
+    Foo:
+      # $ref: Order.yaml
+      type: object
+      properties:
+        businessPartner:
+          $ref: https://gist.githubusercontent.com/nalesnichok/97351d9860f85170e7df28a89e9f2481/raw/644b2be5caf63ca569ad1aaf849f3e45bb6b273f/petstore.yaml#/components/schemas/Order
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+          # test:
+    #   type: object
+    #   properties: 
+    #     partner:
+    #       $ref: "#/components/schemas/test2"
+    # test2:
+    #   type: object
+    #   properties: 
+    #     partner:
+    #       type: string
+    #       description: 'test2'
+    #       example: '23'
