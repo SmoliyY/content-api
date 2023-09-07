@@ -1,0 +1,150 @@
+openapi: 3.1.0
+
+servers:
+  - url:  "https://localhost:4000"
+
+info:
+  title: Node-udemy course
+  version: "1"
+  
+paths:
+  /content-list:
+    get:
+     operationId: getMainContentPage
+     description: "Load HTML content page "
+     summary: "Load HTML content page"
+     parameters:
+      - name: Content-Type
+        in: header
+        schema:
+          type: string
+     responses:
+      200:
+        description: Succssef resspose
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  content:
+                    type: string
+                  description:
+                    type: string
+                  relevant: 
+                    type: boolean
+
+                  
+  '/content/edit-content/{contentId}':
+    post:
+      operationId: editContent
+      summary: "Edit content by id"
+      description: "Edit content by id"
+      parameters:
+        - name: contentId
+          in: path
+          schema:
+            type: string
+      responses:
+        200:
+          description: Succsessfuly edited content and returned new one
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  content:
+                    type: string
+                  description: 
+                    type: string
+                  id: 
+                    type: string
+                  relevant:
+                    type: boolean
+        404:
+          description: No such Content!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorCode: 
+                    type: number
+                    enum: [400]
+                    default: 400
+                  message:
+                    type: string             
+      requestBody:
+        content: 
+          application/json:
+             schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                description: 
+                  type: string
+                relevant: 
+                  type: boolean
+  /content/add-contet:
+    post:
+      operationId: addContent
+      summary: "Add new content, id created bu UUID() and incapsulated on server side"
+      description: "Add new content"
+      parameters:
+        - name: "content-cype"
+          in: header
+          schema:
+            type: string
+      requestBody:
+        content: 
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                description:
+                  type: string
+                relevant: 
+                  type: boolean
+      responses:
+        200:
+          description: Successsful response with ID
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  content:
+                    type: string
+                  description:
+                    type: string
+                  relevant: 
+                    type: boolean
+        500:
+          description: Internal server Error
+  /delete-content/{contentId}:
+    delete:
+      description: Delete content
+      summary: Delete content object from Content and Visited Content tables
+      operationId: deleteContent
+      parameters:
+        - name: contentId
+          in: path
+          schema:
+            type: string
+
+      
+        
+                
+          
+  
+                       
+
+  
