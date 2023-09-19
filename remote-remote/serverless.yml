@@ -1,0 +1,55 @@
+service: feedback-api
+
+frameworkVersion: '3'
+
+package:
+  individually: true
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+
+custom:
+  webpack:
+    webpackConfig: ./webpack.config.js
+  serverless-offline:
+    httpPort: 3003
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+
+functions:
+  feedback:
+    handler: ./src/lambdas/feedback/index.handler
+    events:
+      - httpApi:
+          path: /feedback
+          method: get
+      - httpApi:
+          path: /feedback
+          method: post
+      - httpApi:
+          path: /feedback/{feedbackId}
+          method: get
+      - httpApi:
+          path: /feedback/{feedbackId}
+          method: delete
+      - httpApi:
+          path: /feedback/{feedbackId}
+          method: patch
+      - httpApi:
+          path: /content/{contentId}/feedback
+          method: get
+  organizations:
+    handler: ./src/lambdas/organization/index.handler
+    events:
+      - httpApi:
+          path: /organization/api-key
+          method: get
+          ## TODO add auth method Cognito
+
+  post-confirm:
+    handler: ./src/lambdas/post-confirm/index.handler
+  pre-auth:
+    handler: ./src/lambdas/pre-auth/index.handler

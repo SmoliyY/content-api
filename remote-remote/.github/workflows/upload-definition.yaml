@@ -1,0 +1,19 @@
+name: Upload definition to S3
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Upload to AWS sandbox S3 bucket
+        run: node scripts/upload-to-s3.js
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: us-east-1
+          AWS_S3_PATH: feedbacks-openapi/catalog/

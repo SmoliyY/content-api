@@ -1,0 +1,75 @@
+get:
+  tags:
+    - Feedback Reference
+  summary: Get feedback by ID
+  description: |
+    Return a single feedback results by Id
+  operationId: getFeedbackById
+  parameters: 
+    - $ref: ../components/parameters/feedback-id.yaml
+    - $ref: ../components/parameters/api-key.yaml
+    - $ref: ../components/parameters/content-type.yaml
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Feedback-with-id.yaml
+          example:
+            id: rere
+            feedback:
+              contentId: index-page
+              organizationId: test-org
+              rating: 5
+              suggestion: A suggestion.
+              sentiment: true
+              reason: one
+    '403':
+      description: Forbidden
+    '404':
+      description: Feedback not found
+delete:
+  tags: 
+    -  Feedback Reference
+  operationId: removeFeedbackById
+  summary: Delete feedback by ID
+  parameters: 
+    - $ref: ../components/parameters/feedback-id.yaml
+    - $ref: ../components/parameters/api-key.yaml
+    - $ref: ../components/parameters/content-type.yaml
+  responses: 
+    200: 
+      description: Success
+    403:
+      description: Forbidden
+    404:
+      description: Not Found
+patch:
+  tags: 
+    -  Feedback Reference
+  operationId: updateFeedbackById
+  summary: Update feedback by ID
+  parameters: 
+    - $ref: ../components/parameters/feedback-id.yaml
+    - $ref: ../components/parameters/api-key.yaml
+    - $ref: ../components/parameters/content-type.yaml
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Feedback.yaml
+        examples: 
+          '200':
+            $ref: ../components/examples/feedback.yaml
+          '403':
+            $ref: ../components/examples/feedback.yaml
+          '404':
+            $ref: ../components/examples/feedback.yaml
+  responses: 
+    200: 
+      description: Success
+    403:
+      description: Forbidden
+    404:
+      description: Not Found

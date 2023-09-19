@@ -1,0 +1,11 @@
+{
+    "version": "lambda",
+    "region": "us-east-coast",
+    "userPoolId": "fakeId123",
+    "userName": "someUserName",
+    "request": {
+        "userAttributes": {
+            "sub" : "someUUID"
+        }
+    }
+}

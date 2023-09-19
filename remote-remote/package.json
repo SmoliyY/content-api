@@ -1,0 +1,47 @@
+{
+  "name": "feedback-api",
+  "version": "1.0.0",
+  "description": "Feedback API",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_ENV=development nodemon -e js,ts -x serverless offline start",
+    "generate-test-config": "node scripts/api-test-config.js",
+    "api:test": "npm run generate-test-config && jest __tests__/api.test.js",
+    "api:lint": "redocly lint internal --format stylish",
+    "deploy": "serverless webpack && cd infra && pulumi up -y -s dark-side-feedback-api/dev",
+    "destroy": "cd infra && pulumi destroy -y -s dark-side-feedback-api/dev",
+    "prettier": "npx prettier --write \"**/*.{ts,js}\"",
+    "prettier:check": "npx prettier --check \"**/*.{ts,js}\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SmoliyY/feedback-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SmoliyY/feedback-api/issues"
+  },
+  "homepage": "https://github.com/SmoliyY/feedback-api#readme",
+  "devDependencies": {
+    "@redocly/openapi-core": "^1.0.0-beta.110",
+    "@types/aws-lambda": "^8.10.106",
+    "aws-sdk": "^2.1228.0",
+    "dotenv": "^16.0.3",
+    "jest": "^29.1.2",
+    "nodemon": "^2.0.20",
+    "pactum": "^3.2.2",
+    "prettier": "^2.7.1",
+    "serverless": "^3.22.0",
+    "serverless-offline": "^11.0.1",
+    "serverless-webpack": "^5.10.0",
+    "ts-loader": "^9.4.1",
+    "typescript": "^4.8.4",
+    "uuid": "^9.0.0",
+    "webpack": "^5.74.0"
+  },
+  "dependencies": {
+    "@aws-sdk/lib-dynamodb": "^3.183.0",
+    "dynamoose": "^3.1.0"
+  }
+}

@@ -1,0 +1,36 @@
+plugins: 
+  -  ./training-plugin.js
+
+apis: 
+  internal:
+    root: ./openapi/openapi.yaml
+  external:
+    root: ./openapi/openapi.yaml
+
+decorators:
+  remove-x-internal: on
+
+extends: 
+  - recommended
+  - training/custom
+
+rules: 
+  assert/get-request:
+    subject: Operation
+    property: requestBody
+    defined: false
+    context: 
+      - type: Operation   
+        matchParentKeys: 
+          -  get
+    message: Get request should not contain a request body.
+
+features.openapi:
+  showConsole: true
+  generateCodeSamples:
+    languages:
+      - lang: curl
+      - lang: Node.js
+      - lang: JavaScript
+      - lang: PHP
+      - lang: Python

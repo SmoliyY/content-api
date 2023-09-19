@@ -1,0 +1,13 @@
+{
+    "version": "lambda",
+    "triggerSource": "PostConfirmation_ConfirmSignUp",
+    "region": "us-east-coast",
+    "userPoolId": "fakeId123",
+    "userName": "someUserName",
+    "request": {
+        "userAttributes": {
+            "sub" : "someUUID",
+            "email": "someEmail"
+        }
+    }
+}
